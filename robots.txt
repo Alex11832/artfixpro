@@ -1,0 +1,21 @@
+User-agent: *
+Disallow: /terms
+Disallow: /privacy
+
+Allow: /furniture
+
+Allow: /wall-hanging
+Allow: /wall-hanging-blinds
+Allow: /wall-hanging-mirrors
+Allow: /wall-hanging-shelves
+
+Allow: /tv-mounting
+Allow: /tv-mounting-ads
+Allow: /tv-mounting-sameday
+Allow: /tv-mounting-bestbuy
+Allow: /tv-mounting-fireplace
+Allow: /tv-mounting-frame
+Allow: /tv-mounting-homedepot
+Allow: /tv-mounting-taskrabbit
+
+Sitemap: https://artfixpro.com/sitemap.xml
