@@ -321,50 +321,6 @@ p {
 }
 
 
-/* ============================================
-   CRITICAL CSS for “Video Carousel” section
-   ============================================ */
-
-/* Wrapper for the carousel */
-.video-carousel {
-  margin: 24px auto;       /* Vertical spacing around the block */
-  padding: 0 20px;         /* Horizontal padding to prevent overflow */
-  max-width: 1000px;       /* Match container width */
-  overflow: hidden;        /* Hide overflow from sliding */
-}
-
-/* Splide track container */
-.splide__track {
-  overflow: hidden;
-  position: relative;
-}
-
-/* List of slides */
-.splide__list {
-  display: flex;
-  gap: 12px;               /* Space between slides */
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-/* Each slide */
-.splide__slide {
-  flex: 0 0 calc(25% - 12px); /* Four slides per row minus gaps */
-  aspect-ratio: 9 / 16;       /* Maintain consistent video ratio */
-  border-radius: 8px;
-  overflow: hidden;
-  background: #000;          /* Placeholder background */
-}
-
-/* Video inside a slide */
-.splide__slide video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* Ensure cover without black bars */
-  display: block;
-}
-
 .overlay.hidden {
   display: none !important;
 }
@@ -491,6 +447,27 @@ footer {
 .footer_links ul li a:hover,
 .footer_right ul li a:hover {
   color: #4caf50;
+}
+
+.splide__slide {
+  aspect-ratio: 9 / 16;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #000;
+  max-width: 445px;
+  margin: 0 auto;
+}
+
+.splide__slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  max-width: 445px;
+}
+
+.splide__list {
+  gap: 16px;
 }
 
 @media (max-width: 768px) {

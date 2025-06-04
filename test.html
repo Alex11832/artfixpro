@@ -1,521 +1,138 @@
-<style>
-        body {background:#f5f7fa;}
-        .wall-hanging-booking-form {
-          max-width: 500px;
-          margin: 0 auto 0 auto;
-          background: #fff;
-          border-radius: 18px;
-          box-shadow: 0 6px 32px rgba(34,34,34,0.10);
-          padding: 32px 18px;
-          font-family: 'Inter', Arial, sans-serif;
-        }
-        .wall-hanging-booking-form h2 {
-          text-align: center;
-          margin-bottom: 12px;
-          font-size: 2rem;
-          letter-spacing: -1px;
-        }
-          .input-error {
-            border-color: #e23c3c !important;
-            background: #fff6f6 !important;
-          }
-          .input-error-message {
-            color: #e23c3c;
-            font-size: 0.98em;
-            margin: 3px 0 7px 4px;
-            line-height: 1.2;
-            font-weight: 500;
-            letter-spacing: -0.02em;
-          }
-        .price-banner {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background: #f4f7fb;
-          color: #1a3257;
-          font-weight: 600;
-          border-radius: 8px;
-          font-size: 1.08rem;
-          margin-bottom: 22px;
-          gap: 10px;
-          padding: 8px 0;
-        }
-        .form-label {
-          font-weight: 500;
-          margin-top: 16px;
-          margin-bottom: 6px;
-          display: block;
-          color: #162c46;
-        }
-        .required { color: #d50000; }
-        .category-options-multi {
-          display: flex;
-          gap: 14px;
-          margin-bottom: 18px;
-          justify-content: space-between;
-          flex-wrap: wrap;
-        }
-        .category-option {
-          background: #f4f7fb;
-          border: 2px solid #d9e3ef;
-          border-radius: 14px;
-          flex: 1 1 90px;
-          min-width: 85px;
-          max-width: 120px;
-          padding: 15px 8px 10px 8px;
-          text-align: center;
-          cursor: pointer;
-          transition: border 0.17s, box-shadow 0.17s, background 0.18s;
-          user-select: none;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-        .category-option svg {
-          height: 38px;
-          margin-bottom: 7px;
-          display: block;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        .category-option.active {
-          border: 2px solid #2382f4;
-          background: #e9f2ff;
-          box-shadow: 0 3px 12px 0 rgba(35,130,244,0.09);
-        }
-        .category-option span {
-          font-size: 1rem;
-          color: #234;
-          margin-top: 3px;
-          font-weight: 500;
-        }
-        @media (max-width: 600px) {
-          .category-options-multi {
-            flex-wrap: wrap;
-            gap: 7px;
-          }
-          .category-option {
-            min-width: 78px;
-            max-width: 120px;
-            padding: 10px 3px 8px 3px;
-            font-size: 0.96rem;
-          }
-        }
-        .category-details {
-          margin-bottom: 18px;
-          margin-top: 8px;
-          padding: 13px 0 8px 0;
-          border-bottom: 1px solid #eee;
-          background: #fcfcfd;
-        }
-        .category-label {
-          font-weight: 600;
-          color: #2382f4;
-          font-size: 1.07rem;
-          margin-bottom: 6px;
-          margin-top: 2px;
-        }
-
-        .radio-group {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 18px 32px;
-          margin-bottom: 12px; 
-        }
-
-        .radio-group label {
-          background: #f7f9fc;
-          border: 1.3px solid #d8e4f7;
-          border-radius: 7px;
-          padding: 7px 16px 7px 10px;
-          min-width: unset;
-          font-size: 1rem;
-          font-weight: 400;
-          display: flex;
-          align-items: center;
-          gap: 7px;
-          color: #1a3257;
-          transition: border-color 0.15s, box-shadow 0.18s;
-          cursor: pointer;
-          margin-bottom: 7px;
-          box-shadow: 0 2px 7px 0 rgba(60,130,244,0.02);
-          white-space: nowrap;
-        }
-
-        input[type="radio"] {
-          accent-color: #2382f4;
-          /* margin-right: 5px; */
-          flex-shrink: 10;
-        }
-
-        input, textarea {
-          padding: 8px 10px;
-          margin-top: 2px;
-          border: 1.2px solid #d6dbe8;
-          border-radius: 8px;
-          font-size: 1rem;
-          background: #f8fafb;
-          transition: border .16s;
-          margin-bottom: 11px;
-          resize: vertical;
-        }
-        textarea {
-          width: 95%;
-          margin-right: 10px;
-        }
-
-        input:focus, textarea:focus {
-          border-color: #2382f4;
-          background: #fff;
-          outline: none;
-        }
-        .green_sumbit_btn {
-          width: 100%;
-          background: linear-gradient(90deg, #35b956 0%, #28ad8d 100%);
-          color: #fff;
-          border: none;
-          border-radius: 10px;
-          padding: 15px 0;
-          font-size: 1.13rem;
-          font-weight: 600;
-          margin-top: 12px;
-          letter-spacing: 0.5px;
-          box-shadow: 0 4px 16px 0 rgba(40,173,141,0.08);
-          cursor: pointer;
-          transition: background 0.18s;
-        }
-        .green_sumbit_btn:hover {
-          background: linear-gradient(90deg, #28ad8d 0%, #35b956 100%);
-        }
-        .service-block {
-      background: #f8fbff;
-      border: 2px solid #d3e6fb;
-      border-radius: 15px;
-      margin-bottom: 22px;
-      padding: 18px 16px 14px 16px;
-      box-shadow: 0 2px 10px 0 rgba(35,130,244,0.07);
-      transition: border 0.2s, box-shadow 0.2s;
-    }
-
-    .art-block { border-color: #fbbc04; background: #fffdf7; }
-    .mirror-block { border-color: #82cfff; background: #f6fbff; }
-    .shelf-block { border-color: #b2e7c3; background: #f6fff8; }
-    .curtain-block { border-color: #e1c5fb; background: #faf6ff; }
-
-    .service-block .category-label {
-      color: #2876d9;
-      margin-bottom: 9px;
-      font-size: 1.08rem;
-      font-weight: 700;
-    }
-
-    .form-label {
-      display: block;
-      margin: 15px 0 7px 0;
-      font-weight: 500;
-      color: #234;
-    }
-
-    .radio-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0 34px;  /* горизонтальный отступ между радиокнопками */
-      margin-bottom: 12px;
-    }
-
-    .radio-group label {
-      min-width: 140px;       /* задаёт минимальную ширину, чтобы не прыгали */
-      display: flex;
-      align-items: center;
-      line-height: 1.2;
-      font-size: 1.01rem;
-      color: #20344a;
-      margin-bottom: 8px;
-    }
-
-    input[type="radio"] {
-      accent-color: #2382f4;
-      /* margin-right: 7px; */
-    }
-
-    @media (max-width: 600px) {
-      .radio-group label {
-        min-width: 110px;
-        font-size: 0.99rem;
-      }
-      .service-block {
-        padding: 13px 6px 11px 10px;
-      }
-    }
-      /* Оверлей */
-#bookingFormOverlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(36,45,70,0.17);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 12000;
-  transition: opacity .2s;
-}
-
-/* Скрытое окно */
-#bookingFormOverlay.hidden {
-  display: none !important;
-}
-
-/* Внутри модального окна квиза */
-.booking_modal {
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 42px 0 rgba(10, 23, 55, 0.19);
-  position: relative;
-  padding: 0;
-  max-width: 540px;
-  width: 98vw;
-  max-height: 92vh;
-  display: flex;
-  flex-direction: column;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Видео-отзыв — тестовый блок</title>
+  <style>
+    .splide__slide {
+  aspect-ratio: 9 / 16;
+  border-radius: 12px;
   overflow: hidden;
-}
-
-/* Контейнер формы, чтобы прокручивался только он */
-#quizFormContainer {
-  padding: 28px 18px 20px 18px;
-  overflow-y: auto;
-  max-height: 80vh;
-  min-height: 120px;
-}
-
-/* Кнопка закрытия всегда видна */
-.booking-close {
-  position: absolute;
-  top: 12px;
-  right: 14px;
-  font-size: 2.1rem;
-  color: #a7a7a7;
-  border: none;
-  background: none;
-  z-index: 2;
+  background: #000;
+  max-width: 445px;
+  margin: 0 auto;
   cursor: pointer;
-  padding: 0 5px;
-  transition: color 0.16s;
+  transition: box-shadow 0.2s;
 }
-.booking-close:hover { color: #e35a44; }
-
-@media (width: 600px) {
-  .booking_modal {
-    width: 100vw;
-    border-radius: 0;
-    min-width: 0;
-  }
-  #quizFormContainer {
-    padding: 13px 5vw 13px 5vw;
-    max-height: 74vh;
-  }
+.video-thumb-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: box-shadow 0.2s;
 }
-.sticky-total {
-  position: sticky;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  background: #f4f7fb;
-  box-shadow: 0 -2px 10px rgba(34,34,34,0.07);
-  border-radius: 0 0 8px 8px;
-  padding: 10px 0;
-  margin-bottom: 0;
+.video-thumb-container.playing {
+  box-shadow: 0 0 0 4px #22c55e;
+  border-radius: 12px;
+}
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  background: #000;
 }
   </style>
-<div class="wall-hanging-booking-form" style="max-width:500px;margin:0 auto;">
-  <h2>Furniture Assembly</h2>
+</head>
+<body>
 
-  <!-- 1. Блок выбора мебели -->
-  <div class="service-block furniture-block" style="max-height:420px;overflow-y:auto;position:relative;">
-    <div class="category-label">What do you need assembled?</div>
-    <div class="category-options-multi" style="gap:8px 12px;flex-wrap:wrap;">
-      <div class="category-option" style="min-width:120px;">
-        <span>Desk/Table</span>
-        <span style="font-size:0.98rem;color:#638;">$70</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('desk', -1)">-</button>
-          <span id="qty-desk" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('desk', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>Bed Frame</span>
-        <span style="font-size:0.98rem;color:#638;">$80</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('bed', -1)">-</button>
-          <span id="qty-bed" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('bed', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>Chair</span>
-        <span style="font-size:0.98rem;color:#638;">$50</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('chair', -1)">-</button>
-          <span id="qty-chair" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('chair', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>TV Stand</span>
-        <span style="font-size:0.98rem;color:#638;">$90</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('tv', -1)">-</button>
-          <span id="qty-tv" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('tv', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>Bookcase (Small)</span>
-        <span style="font-size:0.98rem;color:#638;">$75</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('bookcaseS', -1)">-</button>
-          <span id="qty-bookcaseS" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('bookcaseS', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>Bookcase (Large)</span>
-        <span style="font-size:0.98rem;color:#638;">$90</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('bookcaseL', -1)">-</button>
-          <span id="qty-bookcaseL" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('bookcaseL', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>Outdoor Furniture</span>
-        <span style="font-size:0.98rem;color:#638;">$85</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('outdoor', -1)">-</button>
-          <span id="qty-outdoor" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('outdoor', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>Cabinets</span>
-        <span style="font-size:0.98rem;color:#638;">$85</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('cabinets', -1)">-</button>
-          <span id="qty-cabinets" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('cabinets', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>Couch</span>
-        <span style="font-size:0.98rem;color:#638;">$80</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('couch', -1)">-</button>
-          <span id="qty-couch" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('couch', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>Crib</span>
-        <span style="font-size:0.98rem;color:#638;">$75</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('crib', -1)">-</button>
-          <span id="qty-crib" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('crib', 1)">+</button>
-        </div>
-      </div>
-      <div class="category-option" style="min-width:120px;">
-        <span>Shelves</span>
-        <span style="font-size:0.98rem;color:#638;">$75</span>
-        <div style="display:flex;align-items:center;justify-content:center;margin-top:5px;">
-          <button type="button" class="qty-btn" onclick="updateQty('shelves', -1)">-</button>
-          <span id="qty-shelves" style="width:22px;display:inline-block;text-align:center;">0</span>
-          <button type="button" class="qty-btn" onclick="updateQty('shelves', 1)">+</button>
-        </div>
-      </div>
+  <ul id="video-carousel" style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+  <li class="splide__slide">
+    <div class="video-thumb-container">
+      <video
+        playsinline
+        preload="metadata"
+        muted
+        poster="assets/images/thumb1.webp"
+      >
+        <source src="assets/videos/review1.mp4" type="video/mp4" />
+      </video>
     </div>
-    <!-- "Other furniture" -->
-    <div style="margin-top:16px;">
-      <label class="form-label" for="other-furniture">Other furniture (type and quantity) <span>$75/hr</span>:</label>
-      <input type="text" id="other-furniture" name="other_furniture" placeholder="e.g., 2 nightstands, 1 dresser">
+  </li>
+  <li class="splide__slide">
+    <div class="video-thumb-container">
+      <video
+        playsinline
+        preload="metadata"
+        muted
+        poster="assets/images/thumb2.webp"
+      >
+        <source src="assets/videos/review2.mp4" type="video/mp4" />
+      </video>
     </div>
-    <!-- Итоговая сумма -->
-    <div class="price-banner sticky-total" style="margin-top:18px;">
-      Total: <span id="total-price" style="font-weight:700; color:#219150;">$0</span>
+  </li>
+  <li class="splide__slide">
+    <div class="video-thumb-container">
+      <video
+        playsinline
+        preload="metadata"
+        muted
+        poster="assets/images/thumb3.webp"
+      >
+        <source src="assets/videos/review3.mp4" type="video/mp4" />
+      </video>
     </div>
-  </div>
+  </li>
+  <li class="splide__slide">
+    <div class="video-thumb-container">
+      <video
+        playsinline
+        preload="metadata"
+        muted
+        poster="assets/images/thumb4.webp"
+      >
+        <source src="assets/videos/review4.mp4" type="video/mp4" />
+      </video>
+    </div>
+  </li>
+</ul>
 
-  <!-- 2. Дополнительные поля -->
-  <form id="furniture-quiz-form" style="margin-top:18px;">
-    <label class="form-label" for="name">Your Name*</label>
-    <input type="text" id="name" name="name" required>
 
-    <label class="form-label" for="phone">Phone*</label>
-    <input type="tel" id="phone" name="phone" required placeholder="+1 (___) ___-____">
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('#video-carousel .splide__slide').forEach(slide => {
+    const container = slide.querySelector('.video-thumb-container');
+    const video = container.querySelector('video');
 
-    <label class="form-label" for="address">Address*</label>
-    <input type="text" id="address" name="address" required placeholder="Street, Apt, City">
+    // Клик по карточке — play/pause видео
+    slide.addEventListener('click', function () {
+      // Остановить все другие видео
+      document.querySelectorAll('#video-carousel video').forEach(v => {
+        if (v !== video) {
+          v.pause();
+          v.currentTime = 0;
+          v.parentElement.classList.remove('playing');
+        }
+      });
 
-    <label class="form-label" for="date">Preferred Date*</label>
-    <input type="date" id="date" name="date" required>
-
-    <label class="form-label" for="time">Preferred Time*</label>
-    <select id="time" name="time" required>
-      <option value="">Select a time</option>
-      <option value="8:00 AM">8:00 AM</option>
-      <option value="9:00 AM">9:00 AM</option>
-      <option value="10:00 AM">10:00 AM</option>
-      <option value="11:00 AM">11:00 AM</option>
-      <option value="12:00 PM">12:00 PM</option>
-      <option value="1:00 PM">1:00 PM</option>
-      <option value="2:00 PM">2:00 PM</option>
-      <option value="3:00 PM">3:00 PM</option>
-      <option value="4:00 PM">4:00 PM</option>
-      <option value="5:00 PM">5:00 PM</option>
-      <option value="6:00 PM">6:00 PM</option>
-      <option value="7:00 PM">7:00 PM</option>
-    </select>
-
-    <label class="form-label" for="details">Anything else?</label>
-    <textarea id="details" name="details" rows="3" placeholder="Describe anything important (type of wall, access, special requests, etc.)"></textarea>
-
-    <button type="submit" class="green_sumbit_btn">Book Now</button>
-  </form>
-</div>
-
-<script>
-  // Цены для расчёта
-  const prices = {
-    desk: 70,
-    bed: 80,
-    chair: 50,
-    tv: 90,
-    bookcaseS: 75,
-    bookcaseL: 90,
-    outdoor: 85,
-    cabinets: 85,
-    couch: 80,
-    crib: 75,
-    shelves: 75
-  };
-  const limits = { desk:99, bed:99, chair:99, tv:99, bookcaseS:99, bookcaseL:99, outdoor:99, cabinets:99, couch:99, crib:99, shelves:99 };
-
-  function updateQty(type, delta) {
-    const el = document.getElementById('qty-' + type);
-    let val = parseInt(el.innerText, 10);
-    val = isNaN(val) ? 0 : val + delta;
-    if (val < 0) val = 0;
-    if (val > limits[type]) val = limits[type];
-    el.innerText = val;
-    updateTotal();
-  }
-
-  function updateTotal() {
-    let total = 0;
-    Object.keys(prices).forEach(type => {
-      const qty = parseInt(document.getElementById('qty-' + type).innerText, 10) || 0;
-      total += qty * prices[type];
+      if (video.paused) {
+        video.play();
+        container.classList.add('playing');
+      } else {
+        video.pause();
+        container.classList.remove('playing');
+      }
     });
-    document.getElementById('total-price').innerText = `$${total}`;
-  }
+
+    // Показываем/скрываем иконку в зависимости от статуса
+    video.addEventListener('play', function () {
+      container.classList.add('playing');
+    });
+    video.addEventListener('pause', function () {
+      container.classList.remove('playing');
+    });
+    video.addEventListener('ended', function () {
+      video.currentTime = 0;
+      container.classList.remove('playing');
+    });
+
+    // Клик по самому видео — не запускает повторно, чтобы не было двойного play/pause
+    video.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+  });
+});
 </script>
+
+</body>
+</html>
