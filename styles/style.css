@@ -480,7 +480,7 @@ body.modal-open {
   transform-style: preserve-3d;
   display: flex;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
   touch-action: pan-y;
 }
 
@@ -781,11 +781,6 @@ body.modal-open {
   margin-bottom: 30px;
   color: #333;
 }
-
-/* Адаптивные стили */
-@media (max-width: 768px) {}
-
-@media (max-width: 480px) {}
 
 .icon-hidden {
   display: none;
@@ -1096,8 +1091,6 @@ body.modal-open {
     height: auto;
   }
 }
-
-@media (max-width: 480px) {}
 
 @media (min-width: 769px) and (max-width: 1024px) {
   .seo-articles-grid {

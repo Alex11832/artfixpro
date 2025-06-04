@@ -106,9 +106,22 @@ document.addEventListener("DOMContentLoaded", () => {
       bookingOverlay.classList.remove("hidden");
       document.body.classList.add("modal-open");
 
+       // Устанавливаем цену по выбранному тарифу
+      let servicePrice = 60, bookingFee = 25;
+      if (planName.includes("Smart")) servicePrice = 90;
+      if (planName.includes("Pro")) servicePrice = 130;
+      let totalPrice = servicePrice + bookingFee;
+
       // === Форма бронирования ===
       bookingContainer.innerHTML = `
         <h2>Book: ${planName}</h2>
+          <div class="booking-price-breakdown" style="background:#f7fafd;padding:12px 16px;border-radius:7px;font-size:15px;margin-bottom:16px;">
+          <div style="display:flex;justify-content:space-between;"><span>TV Mounting (1 TV):</span><span>$${servicePrice}</span></div>
+          <div style="display:flex;justify-content:space-between;"><span>Booking Fee:</span><span>$${bookingFee}</span></div>
+          <div style="border-top:1px solid #e5e7eb;margin:7px 0 5px;"></div>
+          <div style="display:flex;justify-content:space-between;font-weight:600;"><span>Total:</span><span>$${totalPrice}</span></div>
+          <div style="font-size:13px;color:#888;margin-top:4px;">No hidden fees — what you see is what you pay.</div>
+        </div>
         <form id="bookingForm" novalidate>
           <div class="form-group">
             <label for="date">Select Date:</label>
@@ -250,11 +263,11 @@ document.addEventListener("DOMContentLoaded", () => {
           📮 ZIP: ${data.zip} `
 
         // Calculate cart total based on plan
-        let cartTotal = 120;
+        let cartTotal = 85;
         if (planName.includes("Smart")) {
-          cartTotal = 150;
+          cartTotal = 115;
         } else if (planName.includes("Pro")) {
-          cartTotal = 200;
+          cartTotal = 155;
         }
         
         setTimeout(() => {
