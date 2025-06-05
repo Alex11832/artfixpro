@@ -1,0 +1,43 @@
+<!-- admin.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Статистика посетителей</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Статистика посещений</h1>
+  <canvas id="visitorsChart" width="600" height="300"></canvas>
+  <table border="1" id="statTable"></table>
+  <script>
+    fetch('http://5.23.54.56:3000/stats')
+      .then(res => res.json())
+      .then(data => {
+        // Таблица:
+        let rows = '<tr><th>Дата</th><th>IP</th><th>Страна</th><th>Клики</th><th>Время на сайте (сек)</th></tr>';
+        let days = {}, clicks = [];
+        data.forEach(d => {
+          const date = d.date ? d.date.substr(0,10) : '';
+          rows += `<tr><td>${date}</td><td>${d.ip || ''}</td><td>${d.country || ''}</td><td>${d.clicks || 0}</td><td>${d.sessionDuration || 0}</td></tr>`;
+          if (date) days[date] = (days[date] || 0) + 1;
+          if (d.clicks) clicks.push(d.clicks);
+        });
+        document.getElementById('statTable').innerHTML = rows;
+
+        // График по дням:
+        const ctx = document.getElementById('visitorsChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: Object.keys(days),
+            datasets: [{
+              label: 'Посетителей в день',
+              data: Object.values(days)
+            }]
+          }
+        });
+      });
+  </script>
+</body>
+</html>
