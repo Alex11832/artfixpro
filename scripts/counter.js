@@ -40,6 +40,8 @@
         };
 
         // Отправить на бэкенд
-        navigator.sendBeacon('https://stats.artfixpro.com/collect', JSON.stringify(data));
+        if (data && typeof data === 'object') {
+            navigator.sendBeacon('/collect', JSON.stringify(data));
+        }
     }
 })();
